@@ -1,0 +1,303 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+  --bg-day: #f5f5f5;
+  --text-day: #222;
+  --bg-night: #0a0a0a;
+  --text-night: #eee;
+  --neon-blue: #00ffff;
+  --neon-red: #ff0055;
+  --neon-glow-blue: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+  --neon-glow-red: 0 0 5px #ff0055, 0 0 10px #ff0055, 0 0 20px #ff0055;
+  --card-bg-day: rgba(255, 255, 255, 0.8);
+  --card-bg-night: rgba(0, 0, 0, 0.8);
+}
+
+body.day {
+  background: var(--bg-day);
+  color: var(--text-day);
+}
+
+body.night {
+  background: var(--bg-night);
+  color: var(--text-night);
+}
+
+body {
+  transition: background 0.5s, color 0.5s;
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  padding-bottom: 80px; /* для нижней навигации */
+}
+
+/* Неоновый логотип */
+.neon-logo {
+  filter: drop-shadow(0 0 10px var(--neon-blue));
+  animation: pulse 2s infinite;
+  width: 50px;
+  height: 50px;
+}
+
+@keyframes pulse {
+  0% { filter: drop-shadow(0 0 5px var(--neon-blue)); }
+  50% { filter: drop-shadow(0 0 20px var(--neon-blue), 0 0 30px var(--neon-red)); }
+  100% { filter: drop-shadow(0 0 5px var(--neon-blue)); }
+}
+
+/* 8D-эффект для иконок */
+.icon-8d {
+  transform: perspective(500px) rotateX(2deg) rotateY(2deg);
+  box-shadow: -5px 5px 15px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+}
+
+.icon-8d:hover {
+  transform: perspective(500px) rotateX(5deg) rotateY(5deg);
+}
+
+/* Кнопки */
+.neon-button {
+  background: var(--neon-red);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px var(--neon-red);
+  transition: 0.3s;
+  cursor: pointer;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.neon-button:hover {
+  box-shadow: 0 0 20px var(--neon-red);
+  transform: scale(1.05);
+}
+
+.neon-button.secondary {
+  background: transparent;
+  border: 2px solid var(--neon-blue);
+  color: var(--neon-blue);
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.neon-button.secondary:hover {
+  background: var(--neon-blue);
+  color: black;
+}
+
+/* Карточки товаров */
+.product-card {
+  background: var(--card-bg-night);
+  border: 1px solid var(--neon-blue);
+  border-radius: 10px;
+  padding: 15px;
+  margin: 10px;
+  box-shadow: 0 0 15px var(--neon-blue);
+  transition: 0.3s;
+  animation: float 3s infinite;
+  backdrop-filter: blur(5px);
+}
+
+body.day .product-card {
+  background: var(--card-bg-day);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 25px var(--neon-blue);
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Поисковая строка */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid var(--neon-blue);
+  border-radius: 5px;
+  background: transparent;
+  color: inherit;
+  box-shadow: 0 0 10px var(--neon-blue);
+}
+
+.search-bar input:focus {
+  outline: none;
+  box-shadow: 0 0 20px var(--neon-blue);
+}
+
+/* Нижняя навигация */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  border-top: 2px solid var(--neon-blue);
+  box-shadow: 0 -5px 15px var(--neon-blue);
+  backdrop-filter: blur(10px);
+}
+
+body.day .bottom-nav {
+  background: rgba(255,255,255,0.9);
+}
+
+.nav-item {
+  color: var(--text-night);
+  text-decoration: none;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+body.day .nav-item {
+  color: var(--text-day);
+}
+
+.nav-item.active {
+  background: var(--neon-red);
+  box-shadow: 0 0 15px var(--neon-red);
+  color: white;
+}
+
+/* Модальные окна */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background: var(--card-bg-night);
+  margin: 15% auto;
+  padding: 20px;
+  border: 2px solid var(--neon-blue);
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 0 30px var(--neon-blue);
+  color: var(--text-night);
+}
+
+body.day .modal-content {
+  background: var(--card-bg-day);
+  color: var(--text-day);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: var(--neon-red);
+}
+
+/* Профиль */
+.profile-card {
+  padding: 20px;
+  border: 2px solid var(--neon-blue);
+  border-radius: 10px;
+  box-shadow: 0 0 20px var(--neon-blue);
+  margin-bottom: 20px;
+}
+
+.balance-section {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.balance-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Вкладки */
+.tabs, .admin-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.tab-button, .admin-tab {
+  padding: 10px 20px;
+  background: transparent;
+  border: 2px solid var(--neon-blue);
+  color: inherit;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tab-button.active, .admin-tab.active {
+  background: var(--neon-blue);
+  color: black;
+  box-shadow: 0 0 15px var(--neon-blue);
+}
+
+.tab-content {
+  padding: 20px;
+  border: 2px solid var(--neon-blue);
+  border-radius: 10px;
+  box-shadow: 0 0 15px var(--neon-blue);
+}
+
+/* Списки */
+.deal-item, .transaction-item, .user-item, .product-item {
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid var(--neon-blue);
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.status-pending { color: orange; }
+.status-completed { color: limegreen; }
+.status-cancelled, .status-failed { color: red; }
+.status-refunded { color: yellow; }
+
+/* Адаптив */
+@media (max-width: 768px) {
+  .product-card {
+    margin: 10px 0;
+  }
+}
+

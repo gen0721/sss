@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Профиль</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body class="auto-theme">
+  <div id="app">
+    <header>
+      <img src="assets/logo.svg" alt="Logo" class="logo neon-logo icon-8d">
+      <h1>Профиль</h1>
+    </header>
+
+    <main>
+      <div id="userInfo" class="profile-card">
+        <!-- Информация о пользователе -->
+      </div>
+
+      <div class="balance-section">
+        <h2>Баланс: <span id="balance">0</span> USDT</h2>
+        <button id="depositBtn" class="neon-button">Пополнить</button>
+        <button id="withdrawBtn" class="neon-button">Вывести</button>
+      </div>
+
+      <div class="tabs">
+        <button class="tab-button active" data-tab="deals">Сделки</button>
+        <button class="tab-button" data-tab="purchases">Покупки</button>
+        <button class="tab-button" data-tab="sales">Продажи</button>
+        <button class="tab-button" data-tab="transactions">Транзакции</button>
+      </div>
+
+      <div id="tabContent" class="tab-content">
+        <!-- Содержимое вкладок -->
+      </div>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="/" class="nav-item">🏠 Главная</a>
+      <a href="/profile.html" class="nav-item active">👤 Профиль</a>
+      <a href="/admin.html" class="nav-item">⚙️ Админ</a>
+    </nav>
+  </div>
+
+  <!-- Модальное окно пополнения -->
+  <div id="depositModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Пополнение через Crypto Bot</h3>
+      <input type="number" id="depositAmount" placeholder="Сумма в USDT" min="1">
+      <button id="confirmDeposit">Создать счёт</button>
+      <div id="invoiceLink" style="display:none;">
+        <p>Перейдите по ссылке для оплаты:</p>
+        <a href="#" target="_blank" id="invoiceUrl"></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальное окно вывода -->
+  <div id="withdrawModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Вывод средств</h3>
+      <input type="number" id="withdrawAmount" placeholder="Сумма в USDT" min="1">
+      <input type="text" id="walletAddress" placeholder="Адрес кошелька USDT (TRC20)">
+      <button id="confirmWithdraw">Запросить вывод</button>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>
